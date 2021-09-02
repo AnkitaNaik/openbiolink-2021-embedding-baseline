@@ -63,17 +63,10 @@ def main():
             float('-Inf')
         )
 
-        top10_heads_batch = torch.topk(scores_head, 10)[1]
-        if top10_heads is None:
-            top10_heads = top10_heads_batch
-        else:
-            top10_heads = torch.cat((top10_heads, top10_heads_batch), dim=0)
-
-        top10_tails_batch = torch.topk(scores_tail, 10)[1]
-        if top10_tails is None:
-            top10_tails = top10_tails_batch
-        else:
-            top10_tails = torch.cat((top10_tails, top10_tails_batch), dim=0)
+        top10_heads.append(torch.topk(scores_head, 10)[1])
+        top10_tails.append(torch.topk(scores_tail, 10)[1])
+    top10_heads = torch.cat(top10_heads, dim=0)
+    top10_tails = torch.cat(top10_tails, dim=0)
 
     res = ev.eval(top10_heads, top10_tails, dl.testing)
     print(res)
