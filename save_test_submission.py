@@ -28,7 +28,7 @@ def main():
     head_neg_prepare = model.score_func.create_neg_prepare(True)
     tail_neg_prepare = model.score_func.create_neg_prepare(False)
 
-    entity_emb = model.entity_emb(torch.arange(dl.num_entities).long())
+    entity_emb = model.entity_emb(dl.candidates)
     relation_emb = model.relation_emb(torch.arange(dl.num_relations).long())
 
     start = time.time()
