@@ -12,7 +12,7 @@ from dglke.utils import load_model_config
 def main():
     model_path = sys.argv[1]
 
-    dl = OBL2021Dataset()
+    dl = OBL2021Dataset("./data/OBL2021")
     ev = OBL2021Evaluator()
 
 
@@ -34,8 +34,8 @@ def main():
     start = time.time()
     n_batches, batches = dl.get_test_batches(100)
 
-    top10_tails = None
-    top10_heads = None
+    top10_tails = []
+    top10_heads = []
 
     for batch in tqdm(batches, total=n_batches):
         pos_head_emb = entity_emb[batch[:, 0], :]
