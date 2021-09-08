@@ -27,16 +27,17 @@ from .dataloader import get_dataset
 from .utils import get_compatible_batch_size, save_model, CommonArgParser
 
 backend = os.environ.get('DGLBACKEND', 'pytorch')
-if backend.lower() == 'mxnet':
-    import multiprocessing as mp
-    from .train_mxnet import load_model
-    from .train_mxnet import train
-    from .train_mxnet import test
-else:
-    import torch.multiprocessing as mp
-    from .train_pytorch import load_model
-    from .train_pytorch import train, train_mp
-    from .train_pytorch import test, test_mp
+assert backend.lower() == 'pytorch'
+import torch.multiprocessing as mp
+from .train_pytorch import load_model
+from .train_pytorch import train, train_mp
+from .train_pytorch import test, test_mp
+    
+def set_global_seed(seed):
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    np.random.seed(seed)
+    torch.backends.cudnn.deterministic=True
 
 class ArgParser(CommonArgParser):
     def __init__(self):
@@ -73,9 +74,10 @@ def prepare_save_path(args):
         os.makedirs(args.save_path)
 
 def main():
+    set_global_seed(0)
     args = ArgParser().parse_args()
     prepare_save_path(args)
-
+    
     init_time_start = time.time()
     # load dataset and samplers
     dataset = get_dataset(args.data_path,
