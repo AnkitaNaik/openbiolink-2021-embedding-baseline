@@ -34,10 +34,19 @@ Hyperparameter used to achieve these results:
 Run from project root:
 
 ```bash
-python3 save_test_submission.py {path to model}
+python3 save_test_submission.py
+  --model_path MODEL_PATH
+                        The path of the directory where models are saved.
+  --batch_size_eval BATCH_SIZE_EVAL
+                        The batch size used for evaluation.
+  --gpu GPU             gpu id to be used, e.g. 0, -1 means only cpu is used
 ```
 
-where `path to model` is  the path to the folder containing the model that you want to evaluate.  F.e. if it is the first TransE Model `{path to model}` would be `ckpts/TransE_l2_OBL_0`.
+F.e. for evaluating TransE:
+
+```bash
+python3 save_test_submission.py ./ckpts/TransE_OBL2021_0 --batch_size_eval 100 --gpu 0
+```
 
 # Attribution
 

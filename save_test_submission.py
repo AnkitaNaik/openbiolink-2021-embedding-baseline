@@ -41,10 +41,6 @@ class ArgParser(argparse.ArgumentParser):
                           help='The batch size used for evaluation.')
         self.add_argument('--gpu', type=int, default=[-1], nargs='+',
                           help='a list of active gpu ids, e.g. 0')
-        self.add_argument('--mix_cpu_gpu', action='store_true',
-                          help='Evaluate a knowledge graph embedding model with both CPUs and GPUs.' \
-                               'The embeddings are stored in CPU memory and the training is performed in GPUs.' \
-                               'This is usually used for training a large knowledge graph embeddings.')
 
     def parse_args(self):
         args = super().parse_args()
