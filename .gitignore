@@ -3,3 +3,5 @@ ckpts/
 data/
 UNKNOWN.egg-info/
 pred_OBL2021.npz
+dglke-0.1.2/dglke.egg-info/
+*.pyc
