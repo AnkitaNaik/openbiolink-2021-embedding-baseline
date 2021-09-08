@@ -28,6 +28,8 @@ from .utils import get_compatible_batch_size, save_model, CommonArgParser
 
 backend = os.environ.get('DGLBACKEND', 'pytorch')
 assert backend.lower() == 'pytorch'
+import torch
+import numpy as np
 import torch.multiprocessing as mp
 from .train_pytorch import load_model
 from .train_pytorch import train, train_mp
