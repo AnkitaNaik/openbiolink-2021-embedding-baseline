@@ -45,7 +45,7 @@ python3 save_test_submission.py
 F.e. for evaluating TransE:
 
 ```bash
-python3 save_test_submission.py ./ckpts/TransE_OBL2021_0 --batch_size_eval 100 --gpu 0
+python3 save_test_submission.py --model_path ./ckpts/DistMult_OBL2021_0 --batch_size_eval 100 --gpu 0
 ```
 
 # Attribution
