@@ -6,7 +6,7 @@
 pip install torch openbiolink dgl==0.4.3
 ```
 
-Also from folder `dglke-0.1.2\python` run
+Also from folder `dglke-0.1.2` run
 
 ```bash
 pip install -e .
