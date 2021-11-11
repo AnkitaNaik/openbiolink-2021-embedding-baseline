@@ -30,6 +30,7 @@ from dglke.train_pytorch import load_model_from_checkpoint
 from dglke.train_pytorch import test, test_mp
 from dglke.utils import load_model_config
 
+from openbiolink.obl2021 import OBL2021Dataset, OBL2021Evaluator
 
 class ArgParser(argparse.ArgumentParser):
     def __init__(self):
