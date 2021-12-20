@@ -306,7 +306,7 @@ def ConstructGraph(edges, n_entities, args):
     else:
         src, etype_id, dst = edges
     coo = sp.sparse.coo_matrix((np.ones(len(src)), (src, dst)), shape=[n_entities, n_entities])
-    g = dgl.DGLGraph(coo, readonly=True, multigraph=True, sort_csr=True)
+    g = dgl.DGLGraphStale(coo, readonly=True, multigraph=True, sort_csr=True)
     g.edata['tid'] = F.tensor(etype_id, F.int64)
     if args.has_edge_importance:
         g.edata['impts'] = F.tensor(e_impts, F.float32)
@@ -387,7 +387,7 @@ class TrainDataset(object):
                            exclude_positive=exclude_positive,
                            return_false_neg=False)
 
-class ChunkNegEdgeSubgraph(dgl.DGLGraph):
+class ChunkNegEdgeSubgraph(dgl.DGLGraphStale):
     """Wrapper for negative graph
 
         Parameters
@@ -601,7 +601,7 @@ class EvalDataset(object):
 
         coo = sp.sparse.coo_matrix((np.ones(len(src)), (src, dst)),
                                     shape=[dataset.n_entities, dataset.n_entities])
-        g = dgl.DGLGraph(coo, readonly=True, multigraph=True, sort_csr=True)
+        g = dgl.DGLGraphStale(coo, readonly=True, multigraph=True, sort_csr=True)
         g.edata['tid'] = F.tensor(etype_id, F.int64)
         self.g = g
 
